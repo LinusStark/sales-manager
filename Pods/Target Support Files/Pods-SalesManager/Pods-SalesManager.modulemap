@@ -1,0 +1,6 @@
+framework module Pods_SalesManager {
+  umbrella header "Pods-SalesManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

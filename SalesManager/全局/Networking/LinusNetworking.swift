@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftProgressHUD
-import SwiftyJSON
 
 
 
@@ -44,28 +43,22 @@ class LinusNetworking {
         {
             SwiftProgressHUD.showWait()
         }
+        let param:[String:Any]? = parameters
         
+        let headers = ["content-type":"application/json"]
         
-        let phone:String? = Utils.getPhoneOrNil()
-        var param:[String:Any]? = parameters
-   
-        if phone != nil
+        var encoding:ParameterEncoding
+        
+        if method == .post
         {
-            if param == nil
-            {
-                param = [NetKeyValue.PHONE:phone!]
-            }else{
-                if param![NetKeyValue.PHONE] == nil
-                {
-                    param?.updateValue(phone!, forKey: NetKeyValue.PHONE)
-                }
-            }
-
+             encoding = JSONEncoding.default
+        }else{
+             encoding = URLEncoding.default
         }
         
         
         // 2.发送网络请求
-        Alamofire.request(url, method: method, parameters: param).responseJSON { (response) in
+        Alamofire.request(url, method: method, parameters: param,encoding:encoding,headers:headers).responseJSON { (response) in
             
             if showLoading == true
             {
@@ -76,68 +69,9 @@ class LinusNetworking {
                 print(response.result.error!)
                 Utils.showToastTips("网络错误")
                 
-                if url.contains("/app/us") == true
-                {
-                    finishedCallback([NetKeyValue.ERROR_CODE:NSNumber(integerLiteral: 107)])
-                }
-                
                 return
             }
-            
-            // 4.将结果回调出去
-            
-            let success = result.object(forKey: NetKeyValue.SUCCESS)
-            let errorCode = result.object(forKey: NetKeyValue.ERROR_CODE)
-            if ((errorCode is NSNull) == false && url.contains("phoneOnly") == false && url.contains("getCardInfo") == false) && url.contains("/app/us") == false && url.contains("eAccountQuery") == false//单独加上手机号判断
-            {
-                print(result)
-                //表示有错;
-                let error = result.object(forKey: NetKeyValue.ERROR) as! String
-                
-                let codeNumber:NSNumber = errorCode as! NSNumber
-                
-                let successNumber:NSNumber = success as! NSNumber
-                
-                if codeNumber.intValue == 8 && url.contains("/app/us") == true
-                {
-                    finishedCallback(result)
-                }
-                
-                if url.contains("/wechat/wallet/hasPass") == true
-                {
-                    finishedCallback(result)
-                    return;
-                }
-                
-                if codeNumber.intValue == 38
-                {
-                    //未绑定银行卡
-                    finishedCallback(result)
-                }else if codeNumber.intValue == 0 && successNumber.intValue == 1
-                {
-                     finishedCallback(result)
-                }else{
-                    
-                    if codeNumber.intValue == 9002
-                    {
-                        //退出登录
-                        Utils.exitLogin();
-                        
-                        Utils.showToastTips("您的账号在别处登录")
-                    }else{
-                        
-                        if error.contains("token") == false
-                        {
-                            Utils.showToastTips(error)
-                        }
-                    }
-                }
-                
-            }else{
-                //表示没错;
-                finishedCallback(result)
-            }
-            
+            finishedCallback(result)
         }
     }
     
@@ -179,46 +113,4 @@ class LinusNetworking {
         }
         
     }
-    
-    class func requestByProtogenesis(url:String, params:[String:Any])
-    {
-        let data = try! JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
-        
-        var string = ""
-        
-        let Str = String(data: data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
-        //拼接
-        string = string + Str!
-        
-        let Url = URL.init(string: url)
-        
-        let request = NSMutableURLRequest.init(url: Url!)
-        
-        request.timeoutInterval = 30
-        //请求方式，跟OC一样的
-        request.httpMethod = "POST"
-        request.httpBody = string.data(using: String.Encoding.utf8)
-        request.addValue("APPCODE 2ad2fdc5dd3948ba8c2c9883d7f655f7", forHTTPHeaderField:"Authorization")
-        request.addValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-            if (error != nil) {
-                return
-            }
-            else {
-                //此处是具体的解析，具体请移步下面
-                let json: Any = try! JSONSerialization.jsonObject(with: data!, options: [])
-                if let value = JSON(json)["status"].string {
-                    print("状态是：\(value)")
-                }
-                print(json)
-            }
-        }
-        
-        dataTask.resume()
-        
-        
-    }
-    
 }

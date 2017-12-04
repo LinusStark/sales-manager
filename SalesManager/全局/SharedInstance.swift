@@ -12,13 +12,6 @@ class SharedInstance: NSObject {
     
     static let instance = SharedInstance()
     
-    var userInfo:User?
+    var userInfo:UserInfo?
     
-    var loginInfo:LoginInfo?
-    
-    var isWeb:Bool = false
-    
-    var saveDiviceToken:String?
-    
-    var isPintuan:Bool = false
 }

@@ -10,26 +10,50 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+    @IBOutlet weak var accountText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func nextHandler(_ sender: UIButton) {
+        //下一步
+        if judgeAccount() == false
+        {
+            return
+        }
+        
+        let setPwdVC:SetPwdViewController = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.SET_PWD_VIEW) as! SetPwdViewController
+        
+        setPwdVC.account = self.accountText.text
+        
+        self.present(setPwdVC, animated: true, completion: nil)
+        
+    }
+    @IBAction func closeViewControllerHandler(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func judgeAccount() -> Bool {
+        
+        if (accountText.text?.lengthOfBytes(using: String.Encoding.utf8))! < 1{
+            Utils.showToastTips(ToastCn.PLEASE_INPUT_PHONE_NUMBER)
+            return false;
+        }
+        
+        if (accountText.text?.lengthOfBytes(using: String.Encoding.utf8))! < 11{
+            Utils.showToastTips(ToastCn.PLEASE_INPUT_RIGHT_PHONE)
+            return false;
+        }
+        
+        return true;
+        
     }
-    */
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.accountText.resignFirstResponder()
+    }
 }

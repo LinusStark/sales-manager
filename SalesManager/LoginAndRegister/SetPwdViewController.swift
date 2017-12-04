@@ -9,27 +9,45 @@
 import UIKit
 
 class SetPwdViewController: UIViewController {
-
+    
+    var account:String?
+    
+    @IBOutlet weak var accountText: UILabel!
+    
+    @IBOutlet weak var passwrodText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if account != nil
+        {
+            self.accountText.text = account
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func registerHandler(_ sender: UIButton) {
+        //注册
+        
+        ServicesManager.userRegister(account: account!, password: passwrodText.text!) { (result) in
+            
+            //注册成功返回
+            Utils.showToastTips(ToastCn.REGISTER_SUCCESSED)
+            
+            var rootVC = self.presentingViewController
+            while let parent = rootVC?.presentingViewController {
+                rootVC = parent
+            }
+            //释放所有下级视图
+            rootVC?.dismiss(animated: true, completion: nil)
+            
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func closeViewControllerHandler(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
     }
-    */
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.passwrodText.resignFirstResponder()
+    }
 }

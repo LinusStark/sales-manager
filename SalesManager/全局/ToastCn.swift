@@ -40,5 +40,7 @@ class ToastCn: NSObject {
     static let NO_MORE_DATA = "没有更多数据"
     static let PLEASE_RIGHT_IDCARD_NUMBER = "请输入正确的身份证号码"
     static let CHANGE_PHONE_SUCCESS = "更换手机号码成功"
+    static let REGISTER_SUCCESSED = "注册成功"
+    static let LOGIN_SUCCESSED = "登录成功"
     
 }

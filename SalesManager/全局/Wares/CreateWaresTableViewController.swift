@@ -9,32 +9,56 @@
 import UIKit
 
 class CreateWaresTableViewController: UITableViewController {
-
+    let sections:Array<Int> = [2,3,2]
+    
+    @IBOutlet var wareTableView: UITableView!
+    
+    @IBOutlet weak var wareNameText: UITextField!//名称
+    @IBOutlet weak var wareNoText: UITextField!//货号
+    @IBOutlet weak var purchasePriceText: UITextField!//采购价格
+    @IBOutlet weak var wholesalePriceText: UITextField!//批发价格
+    @IBOutlet weak var retailPriceText: UITextField!//零售价格
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(touchResignHandler))
+        
+        self.wareTableView.addGestureRecognizer(tapGesture)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func chooseColorHandler(_ sender: UIButton) {
+        //选择颜色
+        Utils.showToastTips("选择颜色")
     }
-
+    
+    @IBAction func chooseSizeHandler(_ sender: UIButton) {
+        //选择尺码
+        Utils.showToastTips("选择尺码")
+    }
+    
+    @IBAction func backPopHandler(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return sections[section]
+    }
+    
+    @objc func touchResignHandler() {
+        wareNameText.resignFirstResponder()
+        wareNoText.resignFirstResponder()
+        purchasePriceText.resignFirstResponder()
+        wholesalePriceText.resignFirstResponder()
+        retailPriceText.resignFirstResponder()
     }
 
     /*

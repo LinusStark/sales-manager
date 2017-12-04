@@ -59,4 +59,16 @@ class NetKeyValue: NSObject {
     static let OLD_PHONE = "oldPhone"
     static let NEW_PHONE  = "newPhone"
     static let CODE = "code"
+    static let ADDRESS = "address"
+    
+    static let BRAND = "brand"
+    static let BUSINESS_OWNER_NAME = "businessOwnerName"
+    static let MOBILE = "mobile"
+    static let REMARK = "remark"
+    
+    static let PAGE_SIZE = "pageSize"
+    static let NAME = "name"
+    static let MESSAGE = "message"
+    static let LOGIN = "login"
+    
 }

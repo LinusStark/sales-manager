@@ -9,5 +9,5 @@
 import UIKit
 
 class SegueiDentifiers: NSObject {
-
+    static let WARES_GOTO_CREATE_WARES = "WaresGotoCreateWares"
 }

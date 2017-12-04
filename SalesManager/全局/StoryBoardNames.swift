@@ -9,5 +9,9 @@
 import UIKit
 
 class StoryBoardNames: NSObject {
-
+    static let MAIN:String = "Main"
+    
+    static let LOGIN_AND_REGISTER:String = "LoginAndRegister"
+    
+    static let WARES:String = "Wares"
 }
