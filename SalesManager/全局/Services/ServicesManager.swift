@@ -14,14 +14,26 @@ class ServicesManager: NSObject {
     //获取商品
     class func searchItems(resultHandlerCallback :  @escaping (_ result : Array<Any>) -> ()){
         
-        let param = [NetKeyValue.PAGE_SIZE:10]
-        LinusNetworking.requestData(.get, URLString: NetUrl.GET_SEARCH_ITEMS, parameters: param, showLoading: true) { (result) in
+        let param = [NetKeyValue.PAGE_SIZE:20] as [String : Any]
+        LinusNetworking.requestData(.post, URLString: NetUrl.POST_SEARCH_ITEMS, parameters: param, showLoading: true) { (result) in
             
-            
-            print(result)
-            
+            let data:[String:Any] = result.object(forKey: NetKeyValue.DATA) as! [String:Any]
+            let waresData = data[NetKeyValue.RECORDS] as! Array<Any>
+            resultHandlerCallback(waresData)
         }
     }
+    
+    //获取产品
+    class func searchProducts(resultHandlerCallback :  @escaping (_ result : Array<Any>) -> ()){
+        let param = [NetKeyValue.PAGE_SIZE:20] as [String : Any]
+        LinusNetworking.requestData(.post, URLString: NetUrl.POST_SEARCH_PRODUCTS, parameters: param, showLoading: true) { (result) in
+            
+            let data:[String:Any] = result.object(forKey: NetKeyValue.DATA) as! [String:Any]
+            let waresData = data[NetKeyValue.RECORDS] as! Array<Any>
+            resultHandlerCallback(waresData)
+        }
+    }
+    
     //创建仓库
     class func createWarehouse(address:String, name:String, resultCallBackHandler: @escaping (_ result: NSDictionary) ->()) {
         
@@ -30,19 +42,7 @@ class ServicesManager: NSObject {
         
         LinusNetworking.requestData(.post, URLString: NetUrl.POST_CREATE_WAREHOUSE, parameters: param, showLoading: true) { (result) in
             
-            let code:String = result.object(forKey: NetKeyValue.CODE) as! String
-            
-            if code == "200"
-            {
-                //表示没错;
-                resultCallBackHandler(result)
-            }else{
-                let msg = result.object(forKey: NetKeyValue.MESSAGE)
-                if (msg is NSNull) == false
-                {
-                    Utils.showToastTips(msg as! String)
-                }
-            }
+            resultCallBackHandler(result)
         }
         
     }
@@ -53,19 +53,7 @@ class ServicesManager: NSObject {
         
         LinusNetworking.requestData(.post, URLString: NetUrl.POST_USER_LOGIN, parameters: param, showLoading: true) { (result) in
             
-            let code:String = result.object(forKey: NetKeyValue.CODE) as! String
-            
-            if code == "200"
-            {
-                //登录成功返回token
-                resultCallBackHandler(result)
-            }else{
-                let msg = result.object(forKey: NetKeyValue.MESSAGE)
-                if (msg is NSNull) == false
-                {
-                    Utils.showToastTips(msg as! String)
-                }
-            }
+            resultCallBackHandler(result)
             
         }
     }
@@ -75,25 +63,11 @@ class ServicesManager: NSObject {
         let param = [NetKeyValue.MOBILE:account,NetKeyValue.PASSWORD:password,NetKeyValue.NICK_NAME:"新用户",NetKeyValue.NAME:account]
         
         LinusNetworking.requestData(.post, URLString: NetUrl.POST_USER_REGISTER, parameters: param, showLoading: true) { (result) in
-            let code:String = result.object(forKey: NetKeyValue.CODE) as! String
             
-            if code == "200"
-            {
-                //注册成功
-                resultCallBackHandler(result)
-            }else{
-                let msg = result.object(forKey: NetKeyValue.MESSAGE)
-                if (msg is NSNull) == false
-                {
-                    Utils.showToastTips(msg as! String)
-                }
-            }
+            resultCallBackHandler(result)
         }
     }
     
-    //获取自己商品列表
-    class func getSelfWares(resultCallBackHandler:@escaping (_ result:NSDictionary) -> ()) {
-        
-    }
+    
     
 }

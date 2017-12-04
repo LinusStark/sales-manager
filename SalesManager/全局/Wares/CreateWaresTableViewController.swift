@@ -9,14 +9,13 @@
 import UIKit
 
 class CreateWaresTableViewController: UITableViewController {
-    let sections:Array<Int> = [2,3,2]
+    let sections:Array<Int> = [2,2,2]
     
     @IBOutlet var wareTableView: UITableView!
     
     @IBOutlet weak var wareNameText: UITextField!//名称
     @IBOutlet weak var wareNoText: UITextField!//货号
     @IBOutlet weak var purchasePriceText: UITextField!//采购价格
-    @IBOutlet weak var wholesalePriceText: UITextField!//批发价格
     @IBOutlet weak var retailPriceText: UITextField!//零售价格
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +56,6 @@ class CreateWaresTableViewController: UITableViewController {
         wareNameText.resignFirstResponder()
         wareNoText.resignFirstResponder()
         purchasePriceText.resignFirstResponder()
-        wholesalePriceText.resignFirstResponder()
         retailPriceText.resignFirstResponder()
     }
 

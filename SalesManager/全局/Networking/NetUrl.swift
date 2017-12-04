@@ -12,7 +12,7 @@ class NetUrl: NSObject {
     
     static let POST_USER_BUSINESS = "/api/user-business"//创建商家
     
-    static let GET_SEARCH_ITEMS = "/api/product-items/search"//搜索商品
+    static let POST_SEARCH_ITEMS = "/api/product-items/search"//搜索商品
     
     static let POST_CREATE_WAREHOUSE = "/api/warehouses"//创建仓库
     
@@ -20,6 +20,6 @@ class NetUrl: NSObject {
     
     static let POST_USER_REGISTER = "/api/users/register"//用户注册
     
- 
+    static let POST_SEARCH_PRODUCTS = "/api/products/search"//搜索商品
     
 }

@@ -47,9 +47,7 @@ class ViewController: UIViewController {
             
             switch tagIndex {
             case 0:
-                let vc = Utils.getRootViewControllerWithStoryBoardName(StoryBoardNames.WARES)
-                
-                self.present(vc, animated: true, completion: nil)
+                self.openWares()
                 break;
             default:
                 break;
@@ -60,9 +58,27 @@ class ViewController: UIViewController {
         
         self.scrollContainer.addSubview(gridGroup)
         
-        let loginVC = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.LOGIN_VIEW)
-        self.present(loginVC, animated: true, completion: nil)
+        let token = Utils.getUserDefaultWithKey(LocationKeyValue.USER_TOKEN)
         
+        if token == nil
+        {
+            let loginVC = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.LOGIN_VIEW)
+            self.present(loginVC, animated: true, completion: nil)
+        }else{
+            SharedInstance.instance.userInfo = UserInfo.init()
+            SharedInstance.instance.userInfo?.token = token
+        }
+    }
+    
+    func openWares(){
+        ServicesManager.searchProducts { (datas) in
+            
+            SharedInstance.instance.waresDatas = datas
+            
+            let vc = Utils.getRootViewControllerWithStoryBoardName(StoryBoardNames.WARES)
+
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

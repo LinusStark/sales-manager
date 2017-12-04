@@ -62,6 +62,8 @@ class LoginViewController: UIViewController {
             
             SharedInstance.instance.userInfo = userInfo
             
+            Utils.setUserDefaultWithKey(LocationKeyValue.USER_TOKEN, value: userInfo.token!)
+            
             Utils.showToastTips(ToastCn.LOGIN_SUCCESSED)
             
             self.dismiss(animated: true, completion: nil)
@@ -75,7 +77,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func registerAccountHandler(_ sender: UIButton) {
         //注册账号
-        
         let registerVC = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.REGISTER_VIEW)
         
         self.present(registerVC, animated: true, completion: nil)

@@ -45,17 +45,22 @@ class LinusNetworking {
         }
         let param:[String:Any]? = parameters
         
-        let headers = ["content-type":"application/json"]
+        let token = SharedInstance.instance.userInfo?.token
         
+        var headers:[String:String]
+        if token == nil
+        {
+            headers = ["content-type":"application/json"]
+        }else{
+            headers = ["AUTH-TOKEN":token!,"content-type":"application/json"]
+        }
         var encoding:ParameterEncoding
-        
         if method == .post
         {
              encoding = JSONEncoding.default
         }else{
              encoding = URLEncoding.default
         }
-        
         
         // 2.发送网络请求
         Alamofire.request(url, method: method, parameters: param,encoding:encoding,headers:headers).responseJSON { (response) in
@@ -71,7 +76,18 @@ class LinusNetworking {
                 
                 return
             }
-            finishedCallback(result)
+            let code:String = result.object(forKey: NetKeyValue.CODE) as! String
+            if code == "200"
+            {
+                //表示没错;
+                finishedCallback(result)
+            }else{
+                let msg = result.object(forKey: NetKeyValue.MESSAGE)
+                if (msg is NSNull) == false
+                {
+                    Utils.showToastTips(msg as! String)
+                }
+            }
         }
     }
     
@@ -104,7 +120,6 @@ class LinusNetworking {
                         
                         success(result as! [String : AnyObject])
                     }
-                    
                 }
             case .failure(let encodingError):
                 print(encodingError)

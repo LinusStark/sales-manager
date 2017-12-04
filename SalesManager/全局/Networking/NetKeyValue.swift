@@ -70,5 +70,6 @@ class NetKeyValue: NSObject {
     static let NAME = "name"
     static let MESSAGE = "message"
     static let LOGIN = "login"
+    static let RECORDS = "records"
     
 }

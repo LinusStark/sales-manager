@@ -12,4 +12,5 @@ class iDentifiers: NSObject {
     static let LOGIN_VIEW = "login_view"
     static let REGISTER_VIEW = "register_view"
     static let SET_PWD_VIEW = "set_pwd_view"
+    static let WARES_CELL = "wares_cell"
 }

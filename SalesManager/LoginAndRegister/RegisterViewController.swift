@@ -47,7 +47,6 @@ class RegisterViewController: UIViewController {
             Utils.showToastTips(ToastCn.PLEASE_INPUT_RIGHT_PHONE)
             return false;
         }
-        
         return true;
         
     }

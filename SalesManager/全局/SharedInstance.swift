@@ -14,4 +14,6 @@ class SharedInstance: NSObject {
     
     var userInfo:UserInfo?
     
+    var waresDatas:Array<Any>?
+    
 }

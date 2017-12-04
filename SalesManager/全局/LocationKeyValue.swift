@@ -11,4 +11,5 @@ import UIKit
 class LocationKeyValue: NSObject {
     static let GROUP_TITLE = "group_title"
     static let GROUP_IMAGE_URL = "group_image_url"
+    static let USER_TOKEN = "user_token"
 }
