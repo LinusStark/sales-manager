@@ -117,7 +117,11 @@ class ViewController: UIViewController {
 //            
 //            print(datas)
 //        }
-//        
+//
+        Utils.showToastTips("退出登录")
+        let loginVC = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.LOGIN_VIEW)
+        
+        self.present(loginVC, animated: true, completion: nil)
         
     }
     

@@ -83,10 +83,23 @@ class LinusNetworking {
                 finishedCallback(result)
             }else{
                 let msg = result.object(forKey: NetKeyValue.MESSAGE)
+                
                 if (msg is NSNull) == false
                 {
                     Utils.showToastTips(msg as! String)
                 }
+                
+                if code.contains("4-0001-00004") == true
+                {
+                    Utils.setUserDefaultWithKey(LocationKeyValue.USER_TOKEN, value: "");
+                    
+                    let vc = Utils.getCurrentViewController()
+                    
+                    let loginVC = Utils.getViewControllerWithStoryBoardNameAndIdentifier(StoryBoardNames.LOGIN_AND_REGISTER, identifier: iDentifiers.LOGIN_VIEW)
+                    
+                    vc.present(loginVC, animated: true, completion: nil)
+                }
+                
             }
         }
     }

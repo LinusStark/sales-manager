@@ -112,6 +112,7 @@ class Utils:NSObject
         
     }
     
+    
     class func getViewControllerWithStoryBoardNameAndIdentifier(_ storyboardName:String,identifier:String)-> UIViewController{
         
         let storyBoard = UIStoryboard(name: storyboardName, bundle: nil)
@@ -163,6 +164,36 @@ class Utils:NSObject
         
         return currentAppVersion
     }
+    
+    class func getCurrentViewController()->UIViewController {
+        var result:UIViewController
+        
+        var window:UIWindow = UIApplication.shared.keyWindow!
+        if window.windowLevel != UIWindowLevelNormal
+        {
+            let windows:Array = UIApplication.shared.windows
+            for tmpWin in windows{
+                if tmpWin.windowLevel == UIWindowLevelNormal
+                {
+                    window = tmpWin
+                    break
+                }
+            }
+        }
+        
+        let frontView:UIView = window.subviews.first!
+        let nextResponder = frontView.next
+        if (nextResponder?.isKind(of: UIViewController.self))!{
+            result = nextResponder as! UIViewController
+        }else{
+            result = window.rootViewController!
+        }
+        
+        return result
+        
+    }
+    
+    
     
     
     class func gradualChangeColor(layer:CALayer , startColor:Int64, endColor:Int64)
