@@ -319,8 +319,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="colorContentView" destination="hFf-z0-SCA" id="oKj-Wz-jpz"/>
                         <outlet property="purchasePriceText" destination="gaW-Lh-sGg" id="3Jw-fA-ply"/>
                         <outlet property="retailPriceText" destination="7bF-k0-tuG" id="j0g-8t-P5e"/>
+                        <outlet property="sizeContentView" destination="sl8-Br-4TP" id="6Ah-VI-BDK"/>
                         <outlet property="wareNameText" destination="67z-NS-2Rc" id="XFo-gA-xZe"/>
                         <outlet property="wareNoText" destination="fL1-cz-ban" id="xZI-DW-g4r"/>
                         <outlet property="wareTableView" destination="uO8-mC-IYa" id="VKY-4v-X9J"/>

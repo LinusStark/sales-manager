@@ -14,6 +14,8 @@ class CreateWaresTableViewController: UITableViewController {
     
     var selectedColor:String?
     var selectedSize:String?
+    var selectorColorButtons:ButtonsSelector?
+    var selectorSizeButtons:ButtonsSelector?
     
     @IBOutlet var wareTableView: UITableView!
     
@@ -21,6 +23,50 @@ class CreateWaresTableViewController: UITableViewController {
     @IBOutlet weak var wareNoText: UITextField!//货号
     @IBOutlet weak var purchasePriceText: UITextField!//采购价格
     @IBOutlet weak var retailPriceText: UITextField!//零售价格
+    
+    @IBOutlet weak var sizeContentView: UIView!
+    @IBOutlet weak var colorContentView: UIView!
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.wareTableView.reloadData()
+        
+        let selectorColor = SharedInstance.instance.selectorColor
+        
+        let selectorWidth:CGFloat = Utils.kScreenWidth - 62 * 2
+        if(selectorColor != nil)
+        {
+            let cellHeight:CGFloat = ButtonsSelector.getHeightByDatas(selectorColor!,sumWidth: selectorWidth) + 20
+            if selectorColorButtons == nil{
+                selectorColorButtons = ButtonsSelector.init(frame: CGRect(x:62,y:10,width:selectorWidth,height:cellHeight - 20), datas: selectorColor!)
+                selectorColorButtons!.userEnable = false
+            }else{
+                
+                selectorColorButtons?.frame = CGRect(x: 62, y: 10, width: selectorWidth, height: cellHeight - 20)
+                
+                selectorColorButtons!.update(selectorColor!)
+            }
+            self.colorContentView.addSubview(selectorColorButtons!)
+        }
+        
+        let selectorSize = SharedInstance.instance.selectorSize
+        
+        if(selectorSize != nil)
+        {
+            let cellHeight:CGFloat = ButtonsSelector.getHeightByDatas(selectorSize!,sumWidth: selectorWidth) + 20
+            if selectorSizeButtons == nil{
+                selectorSizeButtons = ButtonsSelector.init(frame: CGRect(x:62,y:10,width:selectorWidth,height:cellHeight - 20), datas: selectorSize!)
+                selectorSizeButtons!.userEnable = false
+            }else{
+                selectorSizeButtons?.frame = CGRect(x: 62, y: 10, width: selectorWidth, height: cellHeight - 20)
+                selectorSizeButtons!.update(selectorSize!)
+            }
+            self.sizeContentView.addSubview(selectorSizeButtons!)
+        }
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,21 +78,21 @@ class CreateWaresTableViewController: UITableViewController {
     
     @IBAction func chooseColorHandler(_ sender: UIButton) {
         //选择颜色
-        Utils.showToastTips("选择颜色")
-//        let selector:ButtonsSelector = ButtonsSelector.init(frame: CGRect(x: (Utils.kScreenWidth - 300)/2, y: (Utils.kScreenHeight - 200)/2, width: 300, height: 200), datas: ["赤红色","橙色","黄色","绿色","青色","蓝青色","紫色","黑色","白色"])
-//
-//        self.view.addSubview(selector)
-        
+        SharedInstance.instance.chooseTitle = "选择颜色"
         self.performSegue(withIdentifier: SegueiDentifiers.WARES_CREATE_GOTO_CHOOSE, sender: self)
         
     }
     
     @IBAction func chooseSizeHandler(_ sender: UIButton) {
         //选择尺码
-        Utils.showToastTips("选择尺码")
+        SharedInstance.instance.chooseTitle = "选择尺码"
+        self.performSegue(withIdentifier: SegueiDentifiers.WARES_CREATE_GOTO_CHOOSE, sender: self)
     }
     
     @IBAction func backPopHandler(_ sender: UIBarButtonItem) {
+        
+        SharedInstance.instance.selectorColor = nil
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -60,6 +106,37 @@ class CreateWaresTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return sections[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        
+        if(indexPath.section == 2 && indexPath.row == 0)
+        {
+            let selectorDatas = SharedInstance.instance.selectorColor
+            
+            if(selectorDatas != nil)
+            {
+                let selectorWidth:CGFloat = Utils.kScreenWidth - 62 * 2
+                let cellHeight:CGFloat = ButtonsSelector.getHeightByDatas(selectorDatas!,sumWidth: selectorWidth) + 20
+                
+                return cellHeight
+            }
+        }
+        if(indexPath.section == 2 && indexPath.row == 1)
+        {
+            let selectorDatas = SharedInstance.instance.selectorSize
+            
+            if(selectorDatas != nil)
+            {
+                let selectorWidth:CGFloat = Utils.kScreenWidth - 62 * 2
+                let cellHeight:CGFloat = ButtonsSelector.getHeightByDatas(selectorDatas!,sumWidth: selectorWidth) + 20
+                
+                return cellHeight
+            }
+        }
+        
+        return 50;
     }
     
     @objc func touchResignHandler() {

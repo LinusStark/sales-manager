@@ -16,4 +16,9 @@ class SharedInstance: NSObject {
     
     var waresDatas:Array<Any>?
     
+    var selectorColor:[String]?
+    var selectorSize:[String]?
+    
+    var chooseTitle:String?
+    
 }

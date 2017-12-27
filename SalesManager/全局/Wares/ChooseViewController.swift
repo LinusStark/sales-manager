@@ -20,11 +20,20 @@ class ChooseViewController: UIViewController,UITableViewDataSource,UITableViewDe
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        dataSource = ["赤红色","橙色","黄色","绿色","青色","蓝青色","紫色","黑色","白色"]
+        if SharedInstance.instance.chooseTitle != nil
+        {
+            self.title = SharedInstance.instance.chooseTitle
+        }
+        if (self.title?.contains("选择颜色"))!
+        {
+            dataSource = ["赤红色","橙色","黄色","绿色","青色","蓝青色","紫色","黑色","白色"]
+        }else{
+            dataSource = ["大","中","小","均码","鞋码"]
+        }
+        
+        cellHeight = ButtonsSelector.getHeightByDatas(dataSource!,sumWidth: Utils.kScreenWidth)
         
         selector = ButtonsSelector.init(frame: CGRect(x: 0, y: 0, width: Utils.kScreenWidth, height: cellHeight!), datas: dataSource!)
-        
-        cellHeight = selector.groupHeight
     }
     
     override func viewDidLoad() {
@@ -39,7 +48,13 @@ class ChooseViewController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     @IBAction func confirmHandler(_ sender: UIBarButtonItem) {
         //确认;
-        
+        if (self.title?.contains("选择颜色"))!
+        {
+            SharedInstance.instance.selectorColor = selector.selectedDatas!
+        }else{
+            SharedInstance.instance.selectorSize = selector.selectedDatas!
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -61,7 +76,10 @@ class ChooseViewController: UIViewController,UITableViewDataSource,UITableViewDe
             cell = UITableViewCell.init(style: .default, reuseIdentifier: selectorCell)
         }
         
-        cell?.contentView .addSubview(selector)
+        cell?.contentView.addSubview(selector)
+        cell?.selectionStyle = .none
+        
+        selector.center = CGPoint(x:Utils.kScreenWidth/2,y:(cellHeight! + 20)/2)
         
         return cell!
     }
@@ -74,7 +92,7 @@ class ChooseViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return cellHeight!
+        return cellHeight! + 20
     }
 
 }
