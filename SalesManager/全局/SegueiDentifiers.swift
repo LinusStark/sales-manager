@@ -10,4 +10,5 @@ import UIKit
 
 class SegueiDentifiers: NSObject {
     static let WARES_GOTO_CREATE_WARES = "WaresGotoCreateWares"
+    static let WARES_CREATE_GOTO_CHOOSE = "CreateWaresGotoChoose"
 }

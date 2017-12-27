@@ -312,6 +312,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="新增商品" id="PCv-5q-OGf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="back_pop_button" id="EgW-cp-lKO">
+                            <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="backPopHandler:" destination="pJv-rJ-8sT" id="ioY-BK-Xyk"/>
                             </connections>
@@ -323,11 +324,56 @@
                         <outlet property="wareNameText" destination="67z-NS-2Rc" id="XFo-gA-xZe"/>
                         <outlet property="wareNoText" destination="fL1-cz-ban" id="xZI-DW-g4r"/>
                         <outlet property="wareTableView" destination="uO8-mC-IYa" id="VKY-4v-X9J"/>
+                        <segue destination="r59-gP-fAo" kind="show" identifier="CreateWaresGotoChoose" id="dci-u4-6Ub"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDw-Q2-hGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775" y="45"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="rVQ-jg-1V2">
+            <objects>
+                <viewController id="r59-gP-fAo" customClass="ChooseViewController" customModule="SalesManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9LX-fv-jTb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="J5D-hY-ZVD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="003-Dq-5de" firstAttribute="bottom" secondItem="J5D-hY-ZVD" secondAttribute="bottom" id="Mz5-xt-vJc"/>
+                            <constraint firstItem="J5D-hY-ZVD" firstAttribute="leading" secondItem="003-Dq-5de" secondAttribute="leading" id="NHd-lU-DCr"/>
+                            <constraint firstItem="003-Dq-5de" firstAttribute="trailing" secondItem="J5D-hY-ZVD" secondAttribute="trailing" id="nnY-4g-bBy"/>
+                            <constraint firstItem="J5D-hY-ZVD" firstAttribute="top" secondItem="003-Dq-5de" secondAttribute="top" id="v6K-6a-ohR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="003-Dq-5de"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="j1v-yA-6yg">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="back_pop_button" id="9TL-Mu-rXj">
+                            <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="backPopHandler:" destination="r59-gP-fAo" id="3Id-Mx-NjP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="qWT-DI-iiZ">
+                            <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="confirmHandler:" destination="r59-gP-fAo" id="omh-Qr-7sI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chooseTableView" destination="J5D-hY-ZVD" id="LFU-BH-Z7X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5D-CJ-4Nw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1484" y="45"/>
         </scene>
         <!--Create Wares View Controller-->
         <scene sceneID="yoq-aj-9ct">

@@ -11,6 +11,10 @@ import UIKit
 class CreateWaresTableViewController: UITableViewController {
     let sections:Array<Int> = [2,2,2]
     
+    
+    var selectedColor:String?
+    var selectedSize:String?
+    
     @IBOutlet var wareTableView: UITableView!
     
     @IBOutlet weak var wareNameText: UITextField!//名称
@@ -29,6 +33,12 @@ class CreateWaresTableViewController: UITableViewController {
     @IBAction func chooseColorHandler(_ sender: UIButton) {
         //选择颜色
         Utils.showToastTips("选择颜色")
+//        let selector:ButtonsSelector = ButtonsSelector.init(frame: CGRect(x: (Utils.kScreenWidth - 300)/2, y: (Utils.kScreenHeight - 200)/2, width: 300, height: 200), datas: ["赤红色","橙色","黄色","绿色","青色","蓝青色","紫色","黑色","白色"])
+//
+//        self.view.addSubview(selector)
+        
+        self.performSegue(withIdentifier: SegueiDentifiers.WARES_CREATE_GOTO_CHOOSE, sender: self)
+        
     }
     
     @IBAction func chooseSizeHandler(_ sender: UIButton) {
@@ -44,7 +54,7 @@ class CreateWaresTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

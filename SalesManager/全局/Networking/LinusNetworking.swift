@@ -99,7 +99,6 @@ class LinusNetworking {
                     
                     vc.present(loginVC, animated: true, completion: nil)
                 }
-                
             }
         }
     }

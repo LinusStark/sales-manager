@@ -15,11 +15,18 @@ class ButtonsSelector: UIView {
     
     var selectedDatas:Array<String>?
     
-    let fontSize:CGFloat = 14
+    let fontSize:CGFloat = 10
+    let gap:CGFloat = 6
+    var groupWidth:CGFloat = 0;
+    var groupHeight:CGFloat = 0;
     
     public convenience init(frame: CGRect , datas:Array<Any>) {
         self.init(frame: frame)
         buttonDatas = datas as! Array<String>
+        
+        self.backgroundColor = UIColor.yellow
+        
+        self.layer.cornerRadius = 6
         
         if buttons == nil{
             buttons = Array.init()
@@ -29,12 +36,14 @@ class ButtonsSelector: UIView {
             selectedDatas = Array.init()
         }
         
+        var index:Int = 0
         let XYGap:CGFloat = 6
         
         var preX:CGFloat = 0 //上一个X位置
         var preY:CGFloat = 0 //上一个Y位置
         
         let buttonHeight:CGFloat = 22;
+        
         
         for name in buttonDatas
         {
@@ -51,10 +60,15 @@ class ButtonsSelector: UIView {
             button.layer.borderColor = UIColor.black.cgColor
             
             
-            let buttonWidth:CGFloat = fontSize * CGFloat(name.lengthOfBytes(using: String.Encoding.utf8)) + 8
+            let buttonWidth:CGFloat = fontSize * CGFloat(name.lengthOfBytes(using: String.Encoding.utf8))
             
-            if (preX + buttonWidth + XYGap) > Utils.kScreenWidth
+            if (preX + buttonWidth + XYGap) > frame.width
             {
+                if groupWidth < (preX - XYGap)
+                {
+                    groupWidth = preX - XYGap;
+                }
+                
                 preY += (buttonHeight + XYGap)
                 preX = 0
             }
@@ -67,7 +81,23 @@ class ButtonsSelector: UIView {
             
             buttons?.append(button)
             
+            index += 1;
+            
+            if index == buttons?.count
+            {
+                groupHeight = button.frame.origin.y + button.frame.size.height
+            }
+            
         }
+        
+        
+        let offsetX = (self.frame.size.width - groupWidth)/2
+        let offsetY = (self.frame.size.height - groupHeight)/2
+        
+        for button in buttons!{
+            button.center = CGPoint(x: button.center.x + offsetX, y: button.center.y + offsetY)
+        }
+        
     }
     
     @objc func clickButtonHandler(_ button:UIButton)

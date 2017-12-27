@@ -25,13 +25,13 @@
 		151D54B31FBAC65300F40D5C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151D54B21FBAC65300F40D5C /* Utils.swift */; };
 		151D54B61FBADC0800F40D5C /* GridGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151D54B51FBADC0800F40D5C /* GridGroupButton.swift */; };
 		151D54B81FBADCF100F40D5C /* LocationKeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151D54B71FBADCF100F40D5C /* LocationKeyValue.swift */; };
-		155DB5C21FD83E7C004FF746 /* ChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DB5C11FD83E7C004FF746 /* ChooseViewController.swift */; };
 		157BB14B1FD3F5F00062F923 /* CreateWaresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157BB14A1FD3F5F00062F923 /* CreateWaresTableViewController.swift */; };
 		157BB14D1FD3F6110062F923 /* CreateWaresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157BB14C1FD3F6110062F923 /* CreateWaresViewController.swift */; };
 		157BB14F1FD3F97B0062F923 /* WaresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157BB14E1FD3F97B0062F923 /* WaresViewController.swift */; };
 		157BB1511FD3FE1E0062F923 /* SegueiDentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157BB1501FD3FE1E0062F923 /* SegueiDentifiers.swift */; };
 		157BB1541FD40B470062F923 /* ScanBarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157BB1531FD40B470062F923 /* ScanBarcodeViewController.swift */; };
 		15A205F71FD2A77300EAD06C /* Wares.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15A205F61FD2A77300EAD06C /* Wares.storyboard */; };
+		15A692A91FF28A24006B7C38 /* ChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A692A81FF28A24006B7C38 /* ChooseViewController.swift */; };
 		15AACDB51FCD92AB00EE92A0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AACDB41FCD92AB00EE92A0 /* UserInfo.swift */; };
 		15DB7A9F1FC474A600AD2D29 /* ServicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DB7A9E1FC474A600AD2D29 /* ServicesManager.swift */; };
 		15E9BE011FD59D73007D1FD3 /* ButtonsSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9BE001FD59D73007D1FD3 /* ButtonsSelector.swift */; };
@@ -86,13 +86,13 @@
 		151D54B21FBAC65300F40D5C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		151D54B51FBADC0800F40D5C /* GridGroupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGroupButton.swift; sourceTree = "<group>"; };
 		151D54B71FBADCF100F40D5C /* LocationKeyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationKeyValue.swift; sourceTree = "<group>"; };
-		155DB5C11FD83E7C004FF746 /* ChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewController.swift; sourceTree = "<group>"; };
 		157BB14A1FD3F5F00062F923 /* CreateWaresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWaresTableViewController.swift; sourceTree = "<group>"; };
 		157BB14C1FD3F6110062F923 /* CreateWaresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWaresViewController.swift; sourceTree = "<group>"; };
 		157BB14E1FD3F97B0062F923 /* WaresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaresViewController.swift; sourceTree = "<group>"; };
 		157BB1501FD3FE1E0062F923 /* SegueiDentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueiDentifiers.swift; sourceTree = "<group>"; };
 		157BB1531FD40B470062F923 /* ScanBarcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanBarcodeViewController.swift; sourceTree = "<group>"; };
 		15A205F61FD2A77300EAD06C /* Wares.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wares.storyboard; sourceTree = "<group>"; };
+		15A692A81FF28A24006B7C38 /* ChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewController.swift; sourceTree = "<group>"; };
 		15AACDB41FCD92AB00EE92A0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		15CD4B171FC2AB3700409A12 /* SalesManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SalesManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		15DB7A9E1FC474A600AD2D29 /* ServicesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesManager.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 			children = (
 				15A205F61FD2A77300EAD06C /* Wares.storyboard */,
 				157BB14A1FD3F5F00062F923 /* CreateWaresTableViewController.swift */,
-				155DB5C11FD83E7C004FF746 /* ChooseViewController.swift */,
+				15A692A81FF28A24006B7C38 /* ChooseViewController.swift */,
 				157BB14C1FD3F6110062F923 /* CreateWaresViewController.swift */,
 				157BB14E1FD3F97B0062F923 /* WaresViewController.swift */,
 			);
@@ -585,7 +585,7 @@
 				150522311FCABF7600B2437C /* RegisterViewController.swift in Sources */,
 				1505223B1FCACE7400B2437C /* iDentifiers.swift in Sources */,
 				15F9B6D61FC457E500553B3A /* NetKeyValue.swift in Sources */,
-				155DB5C21FD83E7C004FF746 /* ChooseViewController.swift in Sources */,
+				15A692A91FF28A24006B7C38 /* ChooseViewController.swift in Sources */,
 				157BB14B1FD3F5F00062F923 /* CreateWaresTableViewController.swift in Sources */,
 				150522341FCAC95A00B2437C /* SharedInstance.swift in Sources */,
 				15AACDB51FCD92AB00EE92A0 /* UserInfo.swift in Sources */,
